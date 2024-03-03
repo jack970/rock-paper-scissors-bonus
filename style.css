@@ -1,0 +1,347 @@
+:root {
+	--dark-text: hsl(229, 25%, 31%);
+	--score-text: hsl(229, 64%, 46%);
+	--header-outline: hsl(217, 16%, 45%);
+
+	--Scissors-border: hsl(39, 89%, 49%);
+	--Paper-border: hsl(230, 89%, 62%);
+	--Rock-border: hsl(349, 71%, 52%);
+	--Lizard-border: hsl(261, 73%, 60%);
+	--Cyan-border: hsl(189, 59%, 53%);
+
+	--Scissors-box: hsl(40deg 84% 53% / 70%);
+	--Paper-box: hsla(230, 89%, 65%, 0.705);
+	--Rock-box: hsla(349, 70%, 56%, 0.712);
+	--Lizard-box: hsla(261, 72%, 63%, 0.705);
+	--Cyan-box: hsla(189, 58%, 57%, 0.692);
+}
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+html {
+	min-width: 100%;
+}
+
+main {
+	min-height: 100vh;
+}
+
+body {
+	font-family: "Barlow Semi Condensed", sans-serif;
+	font-weight: 600;
+	font-style: normal;
+	background: radial-gradient(
+		circle at 50% top,
+		hsl(214, 47%, 23%) 16%,
+		hsl(225, 48%, 19%) 41%,
+		hsl(237, 49%, 15%) 70%
+	);
+	background-repeat: no-repeat;
+	color: white;
+}
+
+button {
+	letter-spacing: 0.2rem;
+	cursor: pointer;
+	appearance: none;
+	padding: 0.6rem 1.5rem;
+	background: transparent;
+	font-size: 0.8rem;
+	color: white;
+	border: 2px solid var(--header-outline);
+	border-radius: 10px;
+}
+
+.cabecalho {
+	margin: 3rem auto;
+	max-width: 60vh;
+	display: flex;
+	justify-content: space-between;
+	border: 0.2rem solid var(--header-outline);
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+.title {
+	line-height: 1.4rem;
+	width: min-content;
+}
+
+.score {
+	padding-top: 0.5rem;
+	background: white;
+	width: 10rem;
+	border-radius: 10px;
+	text-align: center;
+}
+
+.score p {
+	letter-spacing: 0.1rem;
+	color: var(--score-text);
+}
+
+.score h1 {
+	color: var(--dark-text);
+	font-size: 4rem;
+}
+
+.step1 {
+	margin: 0rem auto;
+	margin-top: 9rem;
+	max-width: 24rem;
+	position: relative;
+}
+
+.icon {
+	cursor: pointer;
+	position: absolute;
+	background: white;
+	padding: 1.4rem;
+	border-radius: 50%;
+	display: inline-block;
+}
+
+.icon img {
+	margin: auto;
+	height: 3.4rem;
+	width: 3rem;
+}
+
+.scissors {
+	right: 9rem;
+	top: -4rem;
+	border: 0.7rem solid var(--Scissors-border);
+	box-shadow: 0rem 0.3rem 0px var(--Scissors-box),
+		hsl(217deg 16% 45% / 47%) 0px 0.3rem 0px inset;
+}
+
+.paper {
+	right: 0rem;
+	top: 5rem;
+	border: 0.7rem solid var(--Paper-border);
+	box-shadow: 0rem 0.3rem 0px var(--Paper-box),
+		hsl(217deg 16% 45% / 47%) 0px 0.3rem 0px inset;
+}
+
+.rock {
+	right: 5rem;
+	bottom: -2rem;
+	border: 0.7rem solid var(--Rock-border);
+	box-shadow: 0rem 0.3rem 0px var(--Rock-box),
+		hsl(217deg 16% 45% / 47%) 0px 0.3rem 0px inset;
+}
+
+.lizard {
+	bottom: -2rem;
+	left: 1rem;
+	border: 0.7rem solid var(--Lizard-border);
+	box-shadow: 0rem 0.3rem 0px var(--Lizard-box),
+		hsl(217deg 16% 45% / 47%) 0px 0.3rem 0px inset;
+}
+
+.spock {
+	top: 3rem;
+	left: -2rem;
+	border: 0.7rem solid var(--Cyan-border);
+	box-shadow: 0rem 0.3rem 0px var(--Cyan-box),
+		hsl(217deg 16% 45% / 47%) 0px 0.3rem 0px inset;
+}
+
+.botao-rules {
+	position: absolute;
+	right: 2rem;
+}
+
+.modal {
+	display: none;
+	z-index: 1;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: white;
+	color: var(--dark-text);
+	font-size: 2rem;
+	border-radius: 10px;
+	padding: 2.4rem;
+}
+
+.modal-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 2.4rem;
+}
+
+.modal-close {
+	cursor: pointer;
+	width: 2rem;
+	height: 2rem;
+	content: url("/images/icon-close.svg");
+}
+
+.modal-img {
+	content: url("/images/image-rules-bonus.svg");
+}
+
+.abre-modal {
+	display: block;
+}
+
+.background-modal {
+	background: black;
+	width: 100%;
+	visibility: hidden;
+	position: fixed;
+	height: 100vh;
+	top: 0;
+	opacity: 0;
+	transition: 1s ease;
+}
+
+.abre-background-modal {
+	visibility: visible;
+	opacity: 0.5;
+}
+
+.step2 {
+	margin: 0 auto;
+	max-width: 40rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	transition: all 1s ease;
+}
+
+.step2-transition {
+	max-width: 55rem;
+}
+
+.you,
+.house {
+	text-align: center;
+}
+
+.you .icon,
+.house .icon {
+	margin-top: 2rem;
+	padding: 3rem;
+	position: static;
+	border-width: 1.5rem;
+}
+
+.you .icon img,
+.house .icon img {
+	height: 7rem;
+	width: 7rem;
+}
+
+.result {
+	visibility: hidden;
+	text-align: center;
+	transition: all 1s ease;
+}
+
+.result-transition {
+	visibility: visible;
+	font-size: 2rem;
+}
+
+.attribution {
+	font-size: 11px;
+	text-align: center;
+}
+.attribution a {
+	color: hsl(228, 45%, 44%);
+}
+
+@media screen and (max-width: 750px) {
+	.result {
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: 11rem;
+	}
+
+	.botao-rules {
+		left: 0;
+		right: 0;
+		bottom: 3.5rem;
+		text-align: center;
+	}
+
+	.you .icon img,
+	.house .icon img {
+		height: 3rem;
+		width: 3rem;
+	}
+
+	.you,
+	.house {
+		font-size: 0.6rem;
+	}
+
+	.you .icon,
+	.house .icon {
+		margin-top: 2rem;
+		padding: 1.5rem;
+		border-width: 0.8rem;
+	}
+
+	.step1 {
+		max-width: 15rem;
+	}
+
+	.step1 img {
+		height: 100%;
+		width: 100%;
+	}
+
+	.step1 .icon {
+		height: 2.5rem;
+		width: 2.5rem;
+		padding: 1rem;
+	}
+
+	.scissors {
+		right: 5rem;
+		top: -3rem;
+	}
+
+	.paper {
+		right: -2rem;
+		top: 3rem;
+	}
+
+	.rock {
+		right: 0rem;
+		bottom: -2rem;
+	}
+
+	.modal {
+		height: 100%;
+		width: 100%;
+	}
+
+	.modal-header {
+		justify-content: center;
+	}
+
+	.modal-header h3 {
+		position: absolute;
+		top: 10rem;
+	}
+
+	.modal-img {
+		transform: translateY(70%);
+		margin: 0 auto;
+	}
+
+	.modal-close {
+		position: absolute;
+		bottom: 10rem;
+	}
+}
